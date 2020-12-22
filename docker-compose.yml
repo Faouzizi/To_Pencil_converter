@@ -1,0 +1,11 @@
+version: "1.0"
+services:
+   pencilfy:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - "5001:5001"
+volumes:
+  db_data: {}
