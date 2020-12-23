@@ -1,0 +1,20 @@
+<!-- here we add our contact forms -->
+{% block content %}
+<div class="contact">
+    <h3>Cartoon and skecth results</h3>
+    <img src=".././results/test_cartoon.jpg" alt="User Image1">
+    <img src="'{{ filename2 }}'" alt="User Image2">
+    <img src="'{{ filename3 }}'" alt="User Image3">
+</div>
+</div>
+</form>
+</div>
+
+{% endblock %}
+
+
+
+<!-- add the right css file -->
+{% block styles %}
+<link rel="stylesheet" href="{{url_for('.static', filename='styles.css')}}">
+{% endblock %}
