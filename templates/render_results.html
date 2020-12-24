@@ -1,15 +1,19 @@
 <!-- here we add our contact forms -->
 {% block content %}
-<div class="contact">
+<div class="contact" style="centre">
     <h3>Cartoon and skecth results</h3>
-    <img src=".././results/test_cartoon.jpg" alt="User Image1">
-    <img src="'{{ filename2 }}'" alt="User Image2">
-    <img src="'{{ filename3 }}'" alt="User Image3">
+    </br>
+    <div style="text-align: center;">
+        <img src="data:image/png;base64,{{filename}}"height="40%" alt="Image d'origine">
+        <img src="data:image/png;base64,{{filename2}}"height="40%" alt="Image pencilfy">
+        <img src="data:image/png;base64,{{filename3}}"height="40%" alt="Image en cartoon">
+    </div>
+    <div>
+        <form action="{{url_for('upload_file')}}" method="GET" enctype="multipart/form-data">
+            <input type=submit value='Go Back'>
+        </form>
+    </div>
 </div>
-</div>
-</form>
-</div>
-
 {% endblock %}
 
 

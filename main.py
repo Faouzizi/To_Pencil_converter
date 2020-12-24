@@ -6,6 +6,7 @@ from utils.forms import image_path_forms
 from utils.convert_image import convert_images
 from werkzeug.utils import secure_filename
 import cv2
+import base64
 ci = convert_images()
 ###############################################
 #          Define flask app                   #
@@ -22,13 +23,13 @@ def upload_file():
     if request.method == 'POST':
         image = request.files["file"]
         if image.filename != '':
-            print('image uploaded')
-            print(image)
-            ci.get_image_converted(secure_filename(image.filename), 'test')
-            filename1 = '.././results/test_pencil1.jpg'
-            filename2 = '.././results/test_pencil2.jpg'
-            filename3 = '.././results/test_cartoon.jpg'
-            return render_template('render_results.html', filename=filename1, filename2=filename2, filename3=filename3)
+            flash('image uploaded')
+            image_name = 'test'
+            ci.get_image_converted(secure_filename(image.filename), image_name)
+            image_origine = base64.b64encode(open('./results/'+image_name+'_pencil1.jpg','rb').read()).decode('utf-8')
+            image_pencil = base64.b64encode(open('./results/'+image_name+'_pencil2.jpg','rb').read()).decode('utf-8')
+            image_cartoon = base64.b64encode(open('./results/'+image_name+'_cartoon.jpg','rb').read()).decode('utf-8')
+            return render_template('render_results.html', filename=image_origine, filename2=image_pencil, filename3=image_cartoon)
     return render_template('image_path_forms.html', filename=filename)
 
 ###############################################
