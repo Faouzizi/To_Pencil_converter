@@ -1,3 +1,5 @@
 opencv-python
 flask
 flask_wtf
+flask_uploads
+Werkzeug==0.16.1

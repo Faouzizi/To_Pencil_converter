@@ -1,0 +1,36 @@
+<!-- here we add our contact forms -->
+{% block content %}
+<div class='upload_images'>
+<h1>Cartoon Creator</h1>
+<p>
+    The aim of this project is to modify the styles of uploaded images. Here we transform the orginal photo to create two new pictures.<br>
+    When you upload a new photo, we will provide three photos :   
+    <ul>
+	<li> The first one is the original photo</li>
+        <li> The second one is a drawing of the original one</li>
+        <li> The last one is a cartoon of the original one </li>
+    </ul>
+</p>
+<form method="POST" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+    {{ form.photo }}
+    {% for error in form.photo.errors %}
+    <span style="color: red;">{{ error }}</span>
+    {% endfor %}
+    {{ form.submit }}
+</form>
+
+{% if file_origin_url %}
+<br>
+<img src="{{ file_origin_url }}" height="40%" alt="Image origin">
+<img src="data:image/png;base64,{{file_cartoon_url}}" height="40%" alt="Image Cartoon">
+<img src="data:image/png;base64,{{file_pencil_url}}" height="40%" alt="Image Pencil">
+{% endif %}
+</div>
+{% endblock %}
+
+
+<!-- add the right css file -->
+{% block styles %}
+<link rel="stylesheet" href="{{url_for('.static', filename='styles.css')}}">
+{% endblock %}

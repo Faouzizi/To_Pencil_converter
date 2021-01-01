@@ -2,12 +2,14 @@
 ######################          Import packages    #####################################
 ########################################################################################
 import cv2
+import os 
 
 class convert_images():
-    def get_image_converted(self,path_import, image_name):
+    def get_image_converted(self,path_import, image_name, path):
         ##############################################################################
         ############# Import images
         ##############################################################################
+        print(path_import)
         color_image = cv2.imread(path_import)
 
         ##############################################################################
@@ -18,13 +20,12 @@ class convert_images():
         ##############################################################################
         ############# pencilfy images
         ##############################################################################
-        cartoon_image1, cartoon_image2  = cv2.pencilSketch(color_image, sigma_s=60, sigma_r=0.5, shade_factor=0.01)
+        img_cartoon, img_pencil  = cv2.pencilSketch(color_image, sigma_s=60, sigma_r=0.5, shade_factor=0.01)
 
         ##############################################################################
         ############# export results images
         ##############################################################################
-        cv2.imwrite('./results/'+image_name+'_pencil1'+'.jpg', cartoon_image1)
-        cv2.imwrite('./results/'+image_name+'_pencil2'+'.jpg', cartoon_image2)
-        cv2.imwrite('./results/'+image_name+'_cartoon'+'.jpg', cartoon_image)
-
-
+        img_cartoon_url = ''.join([image_name,'_cartoon','.jpg'])
+        img_pencil_url = ''.join([image_name,'_pencil','.jpg'])
+        cv2.imwrite(os.path.join(path, img_cartoon_url), img_cartoon)
+        cv2.imwrite(os.path.join(path, img_pencil_url), img_pencil)
